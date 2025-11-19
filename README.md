@@ -35,7 +35,7 @@ print('Missing Values\n')
 print(df.isnull().sum())
 print('='*75)
 
-#Total Null values in Data Frame
+# Total Null values in Data Frame
 Total_Null_Count = df.isnull().sum().sum()
 print('Total Null Count:', Total_Null_Count)
 print('='*75)
@@ -59,13 +59,13 @@ df.dropna(how = 'all', inplace = True)
 
 # Mapping the elements by using .map()function - Used in ML model training
 # Gender {Male: 0, Female: 1}
-#if df['Gender'].dtype == 'O':
+# if df['Gender'].dtype == 'O':
 #    df['Gender'] = df['Gender'].map({'Male': 0, 'Female': 1})
 # Industry growth rate {High: 1, Medium: 0, Low: -1}
-#if df['Industry Growth Rate'].dtype == 'O':
+# if df['Industry Growth Rate'].dtype == 'O':
 #     df['Industry Growth Rate'] = df['Industry Growth Rate'].map({'High': 1, 'Medium': 0, 'Low': -1})
 # Education level {High School: 1, Bachelor's: 2, Master's: 3, PhD: 4}
-#if df['Education Level'].dtype == 'O':
+# if df['Education Level'].dtype == 'O':
  # df['Education Level'] = df['Education Level'].map({'High School': 1, "Bachelor's": 2, "Master's": 3, 'PhD': 4})
 
  # Numeric Columns
@@ -137,6 +137,7 @@ sns.heatmap(df[num_cols].corr(), annot=True, cmap='coolwarm', linewidths=0.5)
 plt.title("Correlation Heatmap (Numerical Features)")
 plt.show()
 
+# Cross-Tables
 pd.crosstab(df['Gender'],df['Likely to Change Occupation'])
 
 pd.crosstab(df['Salary'],df['Likely to Change Occupation'])
@@ -156,12 +157,14 @@ for col in num_cols:
     fig = px.box(df, target, col,title = f'{col} vs Likely to Change Occupation' )
     fig.show()
 
+# Plot
 plt.figure(figsize=(10,6))
 plt.scatter(x=df['Age'], y=df['Likely to Change Occupation'])
 plt.xlabel('Age')
 plt.ylabel('Likely to Change Occupation')
 plt.title('Scatterplot of Age vs. Likelihood to Change Occupation')
 
+# Plot
 px.scatter(
     df,
     x='Salary',
@@ -170,6 +173,7 @@ px.scatter(
     title='Scatter Plot Grouped by Raw Age'
 )
 
+# Plot
 num_cols = df.select_dtypes(include=['int64', 'float64']).columns.tolist()
 cat_cols = df.select_dtypes(include=['object']).columns.tolist()
 
@@ -185,10 +189,12 @@ for col in num_cols:
     plt.grid(alpha=0.3)
     plt.show()
 
+# Plot
 df.groupby('Career Change Interest')['Years of Experience'].mean()
 plt.scatter(x='Career Change Interest', y='Years of Experience', data=df)
 plt.show()
 
+# Plot
 print("\n===== Bivariate Analysis =====")
 target = 'Likely to Change Occupation'
 
@@ -201,11 +207,13 @@ for col in cat_cols:
     plt.grid(alpha=0.3)
     plt.show()
 
+# Plot
 plt.figure(figsize=(10, 6))
 sns.barplot(x='Education Level', y='Salary', data=df, estimator=np.mean)
 plt.title('Salary Distribution by Education Level')
 plt.show()
 
+# Plot
 plt.figure()
 plt.hist(df['Years of Experience'], bins=15, edgecolor = 'black')
 plt.title("Histogram")
@@ -213,6 +221,7 @@ plt.xlabel('Age')
 plt.ylabel("Likely to Change Occupation")
 plt.show()
 
+# Plot
 plt.figure(figsize =(7,7))
 plt.pie(df['Likely to Change Occupation'].value_counts(), labels=['No', 'Yes'], autopct='%1.1f%%', startangle=90)
 plt.title("Overall% of Likely to Channge Occupation ")
